@@ -114,7 +114,7 @@ class Server(sd.saved_data):
         self.msg_queue.put(msg)
 
     def format_msg(self, msg, as_user):
-        return as_user.name + ': ' + msg
+        return as_user.name + msg
 
     def handler(self, sock):
         while True:

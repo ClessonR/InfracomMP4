@@ -3,6 +3,8 @@ import classes.client as client
 import classes.server as server
 import tkinter as tk
 import sys
+from datetime import datetime
+
 
 PORT = 30303
 
@@ -151,6 +153,7 @@ class P2PChat(tk.Frame):
                 self.msg_entry.delete(0, tk.END)
             else:
                 self.msg_entry.delete(0, tk.END)
+                msg = "[" + str(datetime.now())[:-7] + "]" + ":" + msg;
                 self.chat.send_msg(msg)
 
 root = tk.Tk()
