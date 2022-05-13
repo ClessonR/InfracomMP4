@@ -147,8 +147,11 @@ class P2PChat(tk.Frame):
     def send_msg(self, event=None):
         if self.chat is not None:
             msg = self.msg_entry.get()
-            self.msg_entry.delete(0, tk.END)
-            self.chat.send_msg(msg)
+            if len(msg.split()) == 0: 
+                self.msg_entry.delete(0, tk.END)
+            else:
+                self.msg_entry.delete(0, tk.END)
+                self.chat.send_msg(msg)
 
 root = tk.Tk()
 p2p_chat = P2PChat(master=root)
