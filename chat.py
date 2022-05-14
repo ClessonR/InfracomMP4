@@ -118,11 +118,19 @@ class P2PChat(tk.Frame):
         send_btn["command"] = self.send_msg
         send_btn.pack(side=tk.RIGHT)
 
+
         # botão de conectar
         connect_btn = tk.Button(ip_port_frame)
         connect_btn["text"] = "Conectar"
         connect_btn["command"] = self.conn_to_host
         self.connect_btn = connect_btn
+
+
+        clean_btn = tk.Button(ip_port_frame)        
+        clean_btn["text"] = "Clear"
+        clean_btn.pack(side=tk.RIGHT)
+        clean_btn["command"] = self.clear_message
+
 
         master = self.master
         master.update()
@@ -155,6 +163,11 @@ class P2PChat(tk.Frame):
                 self.msg_entry.delete(0, tk.END)
                 msg = "[" + str(datetime.now())[:-7] + "]" + ":" + msg;
                 self.chat.send_msg(msg)
+
+    def clear_message(self):
+        self.msg_window.config(state=tk.NORMAL)
+        self.msg_window.delete(1.0, tk.END)
+        self.msg_window.config(state=tk.DISABLED)
 
 root = tk.Tk()
 p2p_chat = P2PChat(master=root)
