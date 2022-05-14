@@ -5,7 +5,6 @@ Repositório dedicado à MP4 de Infraestrutura de Comunicação UFPE
 - [x] Deve existir um campo para digitar a mensagem;
 - [x] Deve existir um botão de enviar, que pega a mensagem que foi digitada, envia ao destinatário e limpa o campo de digitação, para que o usuário possa digitar outra mensagem em seguida;
 - [X] Deve haver a possibilidade de enviar mensagens através da tecla “Enter”, funcionando de modo semelhante ao botão de enviar.
----
 - [x] Deve existir uma área em que as mensagens enviadas sejam visualizadas, e cada mensagem deve ser exibida com sua data e hora de envio além de conter o nome do usuário destinatário; ( Falta só adicionar a data e hora de envio )
 - [x] As mensagens recebidas devem também conter data, hora de recebimento e o nome do usuário que a enviou.
 - [x] Não devem ser enviadas mensagens vazias nem mensagens em branco;
