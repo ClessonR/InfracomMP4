@@ -1,10 +1,13 @@
 from tkinter import messagebox, scrolledtext, simpledialog
+import os
+from click import open_file
 import classes.client as client
 import classes.server as server
 import tkinter as tk
 import sys
 from datetime import datetime
-
+from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfile
 
 PORT = 30303
 
@@ -131,6 +134,11 @@ class P2PChat(tk.Frame):
         clean_btn.pack(side=tk.RIGHT)
         clean_btn["command"] = self.clear_message
 
+        upload_btn = tk.Button(msg_entry_frame)
+        upload_btn["text"] = "Upload" 
+        upload_btn.pack(side=tk.RIGHT)
+        upload_btn["command"] = self.open_file
+
 
         master = self.master
         master.update()
@@ -148,10 +156,10 @@ class P2PChat(tk.Frame):
         if self.chat is not None:
             msgs = self.chat.take_msgs()
             for msg in msgs:
-            	self.msg_window.config(state=tk.NORMAL)
-            	self.msg_window.insert(tk.END, "%s\n" % msg)
-            	self.msg_window.yview(tk.END)
-            	self.msg_window.config(state=tk.DISABLED)
+                self.msg_window.config(state=tk.NORMAL)
+                self.msg_window.insert(tk.END, "%s\n" % msg)
+                self.msg_window.yview(tk.END)
+                self.msg_window.config(state=tk.DISABLED)
         self.master.after(100, self.display_new_msg)
 
     def send_msg(self, event=None):
@@ -168,6 +176,31 @@ class P2PChat(tk.Frame):
         self.msg_window.config(state=tk.NORMAL)
         self.msg_window.delete(1.0, tk.END)
         self.msg_window.config(state=tk.DISABLED)
+
+    def open_file(conn):
+        filename = askopenfile(initialdir = "/",
+                                          title = "Select a File",
+                                          filetypes = (("Video files",
+                                                        "*.mp4*"),
+                                                        ("Image files",
+                                                        "*.jpg*"),
+                                                        ("Music Files",
+                                                        "*.mp3*"),))
+        if os.path.isfile(str(filename)):
+            filesize = int(os.path.getsize(filename))
+            with open(filename,'rb') as f:
+                bytesToSend = f.read(1024)
+                conn.send(bytesToSend)
+                totalSend=len(bytesToSend)
+                while int(totalSend) < int(filesize):
+                    bytesToSend = f.read(1024)
+                    totalSend+=len(bytesToSend)
+                    conn.send(bytesToSend)
+                    sys.stdout.write("r|" + "█" * int((totalSend / float(filesize)) * 50) + "|{0:.2f}".format(
+                            (totalSend / float(filesize)) * 100) + "%  ")
+                    sys.stdout.flush()
+
+    
 
 root = tk.Tk()
 p2p_chat = P2PChat(master=root)
