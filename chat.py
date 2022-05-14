@@ -126,7 +126,7 @@ class P2PChat(tk.Frame):
         self.connect_btn = connect_btn
 
 
-        clean_btn = tk.Button(ip_port_frame)        
+        clean_btn = tk.Button(msg_entry_frame)        
         clean_btn["text"] = "Clear"
         clean_btn.pack(side=tk.RIGHT)
         clean_btn["command"] = self.clear_message
