@@ -85,6 +85,9 @@ class Server(sd.saved_data):
         else:
             to_user.sock.sendall(msg.encode())
 
+
+    
+
     def send_msg_as_sys_to_all(self, msg):
         if not msg:
             return

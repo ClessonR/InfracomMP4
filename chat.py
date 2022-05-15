@@ -177,8 +177,8 @@ class P2PChat(tk.Frame):
         self.msg_window.delete(1.0, tk.END)
         self.msg_window.config(state=tk.DISABLED)
 
-    def open_file(conn):
-        filename = askopenfile(initialdir = "/",
+    def open_file(self):
+        filename = askopenfilename(initialdir = "/",
                                           title = "Select a File",
                                           filetypes = (("Video files",
                                                         "*.mp4*"),
@@ -186,19 +186,8 @@ class P2PChat(tk.Frame):
                                                         "*.jpg*"),
                                                         ("Music Files",
                                                         "*.mp3*"),))
-        if os.path.isfile(str(filename)):
-            filesize = int(os.path.getsize(filename))
-            with open(filename,'rb') as f:
-                bytesToSend = f.read(1024)
-                conn.send(bytesToSend)
-                totalSend=len(bytesToSend)
-                while int(totalSend) < int(filesize):
-                    bytesToSend = f.read(1024)
-                    totalSend+=len(bytesToSend)
-                    conn.send(bytesToSend)
-                    sys.stdout.write("r|" + "█" * int((totalSend / float(filesize)) * 50) + "|{0:.2f}".format(
-                            (totalSend / float(filesize)) * 100) + "%  ")
-                    sys.stdout.flush()
+        self.chat.send_msg(filename)
+
 
     
 
