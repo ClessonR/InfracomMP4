@@ -15,11 +15,10 @@ class User():
 
 class Server(sd.saved_data):
 
-    def __init__(self, port):
+    def __init__(self, port, ip):
         super().__init__()
 
         self._s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ip = socket.gethostbyname(socket.gethostname())
         while True:
             try:
                 self._s.bind((ip, port))
