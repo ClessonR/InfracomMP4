@@ -8,12 +8,23 @@ import sys
 from datetime import datetime
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import askopenfile
+from tkinter.simpledialog import askstring
 
-PORT = 30303
+ROOT = tk.Tk()
+ROOT.withdraw()
+PORT = simpledialog.askstring(title="GET INPUT",
+                                  prompt="Qual Port devemos usar?")
+PORT = int(PORT)
+
+ROOT2 = tk.Tk()
+ROOT2.withdraw()
+IP = simpledialog.askstring(title="GET INPUT",
+                                  prompt="Qual Ip devemos usar?")
 
 class P2PChat(tk.Frame):
     def __init__(self, master=None):
         global PORT
+        global IP
         
         master.wm_title("P2P Chat")
         
@@ -22,7 +33,7 @@ class P2PChat(tk.Frame):
         self.create_interface()
         
         if messagebox.askyesno("", "Voce vai ser o host?"):
-            self.chat = server.Server(PORT)
+            self.chat = server.Server(PORT, IP)
             
             # ip
             self.ip_entry.delete(0, tk.END)
@@ -59,6 +70,7 @@ class P2PChat(tk.Frame):
 
     def create_interface(self):
         global PORT
+        global IP
 
         # Barrinha de Mudar de nome
         menubar = tk.Menu(self)
@@ -81,7 +93,7 @@ class P2PChat(tk.Frame):
         ip_max_len = 15
         ip_entry = tk.Entry(ip_frame, width=ip_max_len)
         ip_entry.pack(side=tk.LEFT)
-        ip_entry.insert(0, '') 
+        ip_entry.insert(0, IP) 
         self.ip_entry = ip_entry
 
         # Port Frame
