@@ -9,6 +9,6 @@ Repositório dedicado à MP4 de Infraestrutura de Comunicação UFPE
 - [x] As mensagens recebidas devem também conter data, hora de recebimento e o nome do usuário que a enviou.
 - [x] Não devem ser enviadas mensagens vazias nem mensagens em branco;
 - [X] Deve existir um botão que limpa o chat.
-- [ ] Deve ser possível o envio de anexo através de um botão, onde será possível escolher um arquivo do computador do usuário e enviá-lo ao destinatário. Esse arquivo poderá ser um vídeo, foto ou música.
-- [ ] Deve haver no chat a visualização do arquivo enviado. Por exemplo: exibir a miniatura da imagem ou a possibilidade de reproduzir o vídeo, ou música escolhida.  
+- [X] Deve ser possível o envio de anexo através de um botão, onde será possível escolher um arquivo do computador do usuário e enviá-lo ao destinatário. Esse arquivo poderá ser um vídeo, foto ou música.
+- [X] Deve haver no chat a visualização do arquivo enviado. Por exemplo: exibir a miniatura da imagem ou a possibilidade de reproduzir o vídeo, ou música escolhida.  
 - [x] Adicionar a opção do usuário escolher o IP e a Porta; 
